@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is a website where one can access programming notes.">
+    <title>CodeNotes Hub</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'><path fill='%239333ea' d='M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5V78.6c0-9.3-5.7-17.6-14.4-20.9C211.3 40.8 152.1 32 96 32 43 32 0 46.1 0 64v352c0 13.3 10.7 24 24 24 41.5 0 85.5 8.4 125.6 23.4 32.3 12.1 66.8 20.6 100 7.1zm76.8 0c33.2 13.5 67.7 5 100-7.1 40.1-15 84.1-23.4 125.6-23.4 13.3 0 24-10.7 24-24V64c0-17.9-43-32-96-32-56.1 0-115.3 8.8-161.6 25.7-8.7 3.3-14.4 11.6-14.4 20.9v377.4c0 11.4 11.6 19.3 22.4 15.5z'/></svg>">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================================================
+         TOP NOTIFICATION CONTAINER
+    ========================================================== -->
+    <div id="top-alert-container"></div>
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
+    <header>
+        <nav class="header-nav">
+            <div class="header-brand">
+                <i class="fa-solid fa-book-open header-logo-icon"></i>
+                <span>CodeNotes Hub</span>
+                <span id="admin-badge" class="admin-badge hidden">Admin Mode</span>
+            </div>
+            <div class="header-actions">
+                <span id="user-welcome" class="user-welcome hidden"></span>
+                <button type="button" id="auth-btn" class="btn btn-primary btn-sm">Sign in</button>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- =========================================================
+         MAIN
+    ========================================================== -->
+    <main>
+
+        <!-- =====================================================
+             ADMIN DASHBOARD
+        ====================================================== -->
+        <section id="admin-dashboard" class="admin-section hidden">
+            <div class="admin-panel">
+                <div class="admin-panel-header">
+                    <div>
+                        <h2 class="admin-panel-title">
+                            <i class="fa-solid fa-user-shield admin-panel-icon"></i>
+                            Admin Control Panel
+                        </h2>
+                        <p class="admin-panel-subtitle">Track metrics and manage registered students below.</p>
+                    </div>
+                    <button type="button" id="add-user-btn" class="btn btn-success btn-sm btn-with-icon">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Add New User
+                    </button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Email Address</th>
+                                <th>Role</th>
+                                <th>Last Login</th>
+                                <th class="text-center">Downloads</th>
+                                <th class="text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             HERO
+        ====================================================== -->
+        <section id="hero-section" class="hero">
+            <div class="hero-dots"></div>
+            <div class="hero-content">
+                <span class="hero-badge">11 subjects &middot; curated PDF notes</span>
+                <h1 class="hero-title">
+                    Programming notes,
+                    <br class="hidden-sm">
+                    ready to download.
+                </h1>
+                <p class="hero-subtitle">
+                    C, C++, Python, Java, OOPs & DSA —
+                    one place for clean, PDF-ready study notes.
+                </p>
+                <div class="hero-actions">
+                    <a href="#subjects" class="btn btn-white btn-lg">
+                        Browse subjects
+                        <i class="fa-solid fa-arrow-right btn-icon-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             QUICK FEATURES
+        ====================================================== -->
+        <section class="features-section">
+            <div class="feature-card">
+                <div class="feature-icon feature-icon-purple">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                <div>
+                    <h3 class="feature-title">Pick a subject</h3>
+                    <p class="feature-desc">Choose from programming subjects tailored for college exams.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon feature-icon-blue">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <div>
+                    <h3 class="feature-title">Sign in Securely</h3>
+                    <p class="feature-desc">Create an account with password to save your progress.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon feature-icon-pink">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </div>
+                <div>
+                    <h3 class="feature-title">Download PDF</h3>
+                    <p class="feature-desc">Instant access to programming notes.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             SUBJECTS
+        ====================================================== -->
+        <section id="subjects" class="subjects-section">
+            <div class="subjects-header">
+                <div>
+                    <h2 class="subjects-title">Subjects Dashboard</h2>
+                    <p class="subjects-subtitle">Pick a subject to access its PDF notes.</p>
+                </div>
+                <div id="admin-info-text" class="admin-info hidden">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    Owner Admin mode active.
+                </div>
+            </div>
+            <div id="subjects-grid" class="subjects-grid"></div>
+        </section>
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+    <footer>
+        <div class="footer-content">
+            &copy; 2026 CodeNotes Hub — Crafted for learners.
+        </div>
+    </footer>
+
+
+    <!-- =========================================================
+         LOGIN / FORGOT PASSWORD MODAL
+    ========================================================== -->
+    <div id="signin-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <button type="button" class="modal-close" data-close="signin-modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="modal-header">
+                <div class="modal-icon">
+                    <i class="fa-solid fa-user-lock"></i>
+                </div>
+                <h3 class="modal-title">Account Authentication</h3>
+                <p id="auth-modal-desc" class="modal-desc">Sign in or register a new profile.</p>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="login-main-form" class="form-stack">
+                <div>
+                    <label class="form-label" for="login-name">Your Full Name</label>
+                    <input type="text" id="login-name" class="form-input" placeholder="Enter your Name" required>
+                </div>
+                <div>
+                    <label class="form-label" for="login-email">Email Address</label>
+                    <input type="email" id="login-email" class="form-input" placeholder="you@example.com" required>
+                </div>
+                <div>
+                    <label class="form-label" for="login-password">Password</label>
+                    <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <div class="form-link-row">
+                    <button type="button" id="forgot-password-btn" class="btn-link">Forgot Password?</button>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Enter Portal</button>
+            </form>
+
+            <!-- FORGOT PASSWORD -->
+            <div id="forgot-password-form" class="form-stack hidden">
+                <!-- STEP 1 -->
+                <div id="forgot-step-1" class="form-stack">
+                    <div>
+                        <label class="form-label" for="forgot-email">Registered Email Address</label>
+                        <input type="email" id="forgot-email" class="form-input" placeholder="Enter your registered email">
+                    </div>
+                    <button type="button" id="send-otp-btn" class="btn btn-info btn-block">
+                        <i class="fa-solid fa-paper-plane btn-icon-sm"></i>
+                        Send OTP to Email
+                    </button>
+                </div>
+                <!-- STEP 2 -->
+                <div id="forgot-step-2" class="form-stack hidden">
+                    <div class="otp-info-box">
+                        <i class="fa-solid fa-envelope-open-text"></i>
+                        OTP has been sent to your registered email.
+                        <strong id="show-otp" class="otp-display">Check your inbox</strong>
+                    </div>
+                    <div>
+                        <label class="form-label" for="verify-otp-input">Enter 4-Digit OTP</label>
+                        <input type="text" id="verify-otp-input" class="form-input otp-input" maxlength="4" inputmode="numeric" pattern="[0-9]{4}" placeholder="Enter OTP">
+                    </div>
+                    <button type="button" id="verify-otp-btn" class="btn btn-success btn-block">
+                        <i class="fa-solid fa-circle-check btn-icon-sm"></i>
+                        Verify OTP
+                    </button>
+                </div>
+                <!-- STEP 3 -->
+                <div id="forgot-step-3" class="form-stack hidden">
+                    <div>
+                        <label class="form-label" for="forgot-new-password">Set New Password</label>
+                        <input type="password" id="forgot-new-password" class="form-input" placeholder="Minimum 4 characters">
+                    </div>
+                    <button type="button" id="save-password-btn" class="btn btn-primary btn-block">Update Password & Login</button>
+                </div>
+                <div class="back-to-login">
+                    <button type="button" id="back-to-login-btn" class="btn-link">
+                        <i class="fa-solid fa-arrow-left btn-icon-sm"></i>
+                        Back to Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =========================================================
+         CUSTOM PROMPT MODAL (replaces prompt()/alert()/confirm())
+    ========================================================== -->
+    <div id="custom-prompt-modal" class="modal-overlay hidden">
+        <div class="modal-box modal-box-sm">
+            <div class="modal-header">
+                <h3 id="custom-prompt-title" class="modal-title"></h3>
+                <p id="custom-prompt-desc" class="modal-desc"></p>
+            </div>
+            <div class="form-stack">
+                <div id="custom-prompt-input-wrapper">
+                    <label class="form-label" for="custom-prompt-input" id="custom-prompt-label"></label>
+                    <input type="text" id="custom-prompt-input" class="form-input">
+                </div>
+                <div id="custom-prompt-alert-msg" class="custom-alert-msg hidden"></div>
+                <div class="modal-actions">
+                    <button type="button" id="custom-prompt-cancel" class="btn btn-secondary">Cancel</button>
+                    <button type="button" id="custom-prompt-ok" class="btn btn-primary">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONFIRM MODAL (replaces confirm()) -->
+    <div id="custom-confirm-modal" class="modal-overlay hidden">
+        <div class="modal-box modal-box-sm">
+            <div class="modal-header">
+                <div class="modal-icon modal-icon-info">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3 id="custom-confirm-title" class="modal-title">Confirm Action</h3>
+                <p id="custom-confirm-message" class="modal-desc"></p>
+            </div>
+            <div class="modal-actions">
+                <button type="button" id="custom-confirm-cancel" class="btn btn-secondary">Cancel</button>
+                <button type="button" id="custom-confirm-ok" class="btn btn-danger">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =========================================================
+         PDF VIEWER
+    ========================================================== -->
+    <div id="pdf-modal" class="modal-overlay pdf-modal-overlay hidden">
+        <div class="pdf-modal-box">
+            <div class="pdf-modal-header">
+                <h3 id="pdf-modal-title" class="pdf-modal-title">
+                    <i class="fa-solid fa-file-pdf pdf-modal-icon"></i>
+                    Notes Preview
+                </h3>
+                <div class="pdf-modal-actions">
+                    <a id="pdf-download-direct" href="#" download class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-download btn-icon-sm"></i>
+                        Direct Download
+                    </a>
+                    <button type="button" id="pdf-close-btn" class="pdf-close-btn">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="pdf-frame-wrapper">
+                <iframe id="pdf-frame" src="" title="PDF Preview"></iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
